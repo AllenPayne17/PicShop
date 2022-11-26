@@ -1,16 +1,14 @@
 import React from "react";
 import { format } from "date-fns";
 import { BsHeart, BsPlusSquare } from "react-icons/bs";
-import '../App.css';
+import '../styles/mobile.css';
 
-export default function Image(props) {
-
-    console.log(props)
+export default function MobileImage(props) {
 
     return(
-        <>
+        <div>
         <div className="profile-info">
-        <img className="profile" src={props.user.profile_image.medium} alt="" />
+        <img className="profile" src={props.user.profile_image.small} alt="" />
         <ul>
             <li className="name">{props.user.name}</li>
             <li className="date">{format(new Date(props.created_at), "dd MMMM yyyy")}</li>
@@ -22,6 +20,6 @@ export default function Image(props) {
             <BsPlusSquare size={31} />
         </div>
         <hr />
-        </>
+        </div>
     )
 }
