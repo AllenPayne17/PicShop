@@ -8,7 +8,7 @@ export default function Images() {
 
     const {photos} = useContext(Context)
 
-    const desktopImages = photos.map((image) => (
+    const Images = photos.map((image) => (
         <Image key={image.id} {...image} />
     ))
 
@@ -16,7 +16,7 @@ export default function Images() {
         <>
             <Header />
             <div className="container">
-                {desktopImages}
+                {Images}
             </div>
         </>
     )

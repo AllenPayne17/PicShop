@@ -62,7 +62,7 @@ export default function Image(props) {
         const color = windowSize.innerWidth < 800 ? {color: "black"} : {color: "white"}
 
         const profile = (
-            <div className="profile-info overlay bottom " hide>
+            <div className="profile-info overlay bottom">
             <img className="profile" src={props.user.profile_image.medium} alt="" />
             <ul>
                 <li className="name" style={color}>{props.user.name}</li>
