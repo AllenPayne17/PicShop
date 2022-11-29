@@ -95,3 +95,31 @@ hr {
         background: linear-gradient(180deg, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0) 100%);
     }
 }
+
+.cart-container {
+    margin: 0 15px 0 15px;
+}
+.cart-container > h1, h3 {
+    text-align: center;
+}
+
+.item-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 0;
+}
+.item-container > img {
+    width: 200px;
+    max-width: 200px;
+    height: auto;
+}
+.info {
+    width: 100%;
+    max-width: 350px;
+    padding: 0 15px 0 15px;
+}
+.info > p:last-of-type {
+    font-size: 13px;
+    font-style: italic;
+}

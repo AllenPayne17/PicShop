@@ -20,6 +20,8 @@ function Provider({children}) {
           };
     },[])
 
+    const toggleDelete = (id) => setCartItem(cartItem.filter(item => item.id !== id))
+
     function getWindowSize() {
         const { innerWidth } = window;
         return { innerWidth };
@@ -58,7 +60,7 @@ function Provider({children}) {
     },[])
 
     return(
-        <Context.Provider value={{photos, windowSize, toggleFevorite, addToCart, cartItem, removeFromCart}}>
+        <Context.Provider value={{photos, windowSize, toggleFevorite, addToCart, cartItem, removeFromCart, toggleDelete}}>
             {children}
         </Context.Provider>
     )
