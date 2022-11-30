@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/PicShop/static/css/main.6f37fc56.css",
+    "main.js": "/PicShop/static/js/main.88839131.js",
+    "index.html": "/PicShop/index.html",
+    "main.6f37fc56.css.map": "/PicShop/static/css/main.6f37fc56.css.map",
+    "main.88839131.js.map": "/PicShop/static/js/main.88839131.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.6f37fc56.css",
+    "static/js/main.88839131.js"
+  ]
+}
