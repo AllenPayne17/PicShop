@@ -7,11 +7,11 @@ import logo from '../assets/Logo.png';
 export default function Header() {
     return(
         <div className="header">
-            <Link to="/">
+            <Link to="/PicShop">
                 <img src={logo} alt="logo" />
             </Link>
-            <Link to="/cart">
-                <BsCart3 size={31} className="cart" />
+            <Link to="/PicShop/cart">
+                <BsCart3 size={31} color="black" className="cart" />
             </Link>
         </div>
     )

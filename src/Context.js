@@ -9,6 +9,17 @@ function Provider({children}) {
     const [cartItem, setCartItem] = useState([])
 
     useEffect(() => {
+        localStorage.setItem('items', JSON.stringify(cartItem))
+    }, [cartItem])
+
+    useEffect(() => {
+        const items_in_Cart = JSON.parse(localStorage.getItem('items'))
+        if(items_in_Cart.length !== 0) {
+            setCartItem(items_in_Cart)
+        }
+    }, [])
+
+    useEffect(() => {
         function handleWindowResize() {
             setWindowSize(getWindowSize());
           }
@@ -60,7 +71,14 @@ function Provider({children}) {
     },[])
 
     return(
-        <Context.Provider value={{photos, windowSize, toggleFevorite, addToCart, cartItem, removeFromCart, toggleDelete}}>
+        <Context.Provider value={{
+            photos, 
+            windowSize, 
+            toggleFevorite, 
+            addToCart, 
+            cartItem,
+            removeFromCart, 
+            toggleDelete}}>
             {children}
         </Context.Provider>
     )

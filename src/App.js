@@ -6,8 +6,8 @@ function App() {
   return (
     <>
     <Routes>
-      <Route exact path='/' element={<Images />} />
-      <Route exact path='/cart' element={<Cart />} />
+      <Route exact path='/PicShop' element={<Images />} />
+      <Route exact path='/PicShop/cart' element={<Cart />} />
     </Routes>
     </>
   );

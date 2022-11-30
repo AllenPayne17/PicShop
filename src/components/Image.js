@@ -23,18 +23,18 @@ export default function Image(props) {
 
     function heart() {
         if(props.liked_by_user) {
-            return <BsHeartFill size={32} color="red" onClick={() => toggleFevorite(props.id) } />
+            return <BsHeartFill size={32} style={{cursor: 'pointer'}} color="red" onClick={() => toggleFevorite(props.id) } />
         }else {
-            return <BsHeart size={32} color={heartCartColor} onClick={() => toggleFevorite(props.id) } />
+            return <BsHeart size={32} style={{cursor: 'pointer'}} color={heartCartColor} onClick={() => toggleFevorite(props.id) } />
         }
     }
 
     function cart() {
         const itemAdded = cartItem.find(photo => photo.id === props.id)
         if(itemAdded){
-            return <MdBookmarkAdded size={32} color="blue" onClick={() => removeFromCart(props)}/>
+            return <MdBookmarkAdded size={32} style={{cursor: 'pointer'}} color="blue" onClick={() => removeFromCart(props)}/>
         }else {
-            return <MdBookmarkAdd size={32} color={heartCartColor} onClick={() => addToCart(props)}/>
+            return <MdBookmarkAdd size={32} style={{cursor: 'pointer'}} color={heartCartColor} onClick={() => addToCart(props)}/>
         }
     }
 
@@ -81,7 +81,7 @@ export default function Image(props) {
     return(
         <div className="image-container" ref={ref}>
             {profile()}
-            <img className="image" src={props.urls.full} alt="" />
+            <img className="image" src={props.urls.full} alt={props.alt_description} loading="lazy" />
             {heartAndCart()}
         </div>
     )
