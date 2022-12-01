@@ -6,18 +6,24 @@ function Provider({children}) {
 
     const [photos, setPhotos] = useState([]);
     const [windowSize, setWindowSize] = useState(getWindowSize());
-    const [cartItem, setCartItem] = useState([])
+    const [fevoriteID, setFevoriteID] = useState(() => {
+        return JSON.parse(window.localStorage.getItem('liked')) || []
+    })
+    const [cartItem, setCartItem] = useState(() => {
+        return JSON.parse(window.localStorage.getItem('items')) || []
+    })
 
     useEffect(() => {
-        localStorage.setItem('items', JSON.stringify(cartItem))
-    }, [cartItem])
-
-    useEffect(() => {
-        const items_in_Cart = JSON.parse(localStorage.getItem('items'))
-        if(items_in_Cart.length !== 0) {
-            setCartItem(items_in_Cart)
+        if(fevoriteID){
+            window.localStorage.setItem('liked', JSON.stringify(fevoriteID))
         }
-    }, [])
+    }, [fevoriteID])
+
+    useEffect(() => {
+        if(cartItem){
+            window.localStorage.setItem('items', JSON.stringify(cartItem))
+        }
+    }, [cartItem])
 
     useEffect(() => {
         function handleWindowResize() {
@@ -37,16 +43,14 @@ function Provider({children}) {
         const { innerWidth } = window;
         return { innerWidth };
     }
-
-    function toggleFevorite(id) {
-        const updatePhotos = photos.map(photo => {
-            if(photo.id === id){
-                return {...photo, liked_by_user: !photo.liked_by_user}
-            }
-            return photo
+    
+    function addToStorage(id) {
+        setFevoriteID(prevID => [...prevID, id])
+    }
+    function removeFromStorage(id) {
+        setFevoriteID(prevID => {
+            return prevID.filter(fevorited => fevorited !== id)
         })
-
-        setPhotos(updatePhotos)
     }
 
     function addToCart(newPhoto) {
@@ -61,20 +65,25 @@ function Provider({children}) {
         )
     }
 
+    const fetchImages = async () => {
+        
+        const response = await fetch(`https://api.unsplash.com/photos/random?client_id=${process.env.REACT_APP_UNSPLASH_API_KEY}&count=10`)
+        const data = await response.json()
+        setPhotos([...photos, ...data])
+    }
     useEffect(() => {
-        const fetchImages = async () => {
-            const response = await fetch(`https://api.unsplash.com/photos/?client_id=${process.env.REACT_APP_UNSPLASH_API_KEY}`)
-            const data = await response.json()
-            setPhotos(data)
-        }
         fetchImages()
+        //eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
 
     return(
         <Context.Provider value={{
-            photos, 
+            photos,
+            fetchImages,
             windowSize, 
-            toggleFevorite, 
+            fevoriteID,
+            addToStorage,
+            removeFromStorage,
             addToCart, 
             cartItem,
             removeFromCart, 

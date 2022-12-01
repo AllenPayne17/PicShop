@@ -11,10 +11,12 @@ export default function Image(props) {
     const [hovered, ref] = useHover()
 
     const {
-        toggleFevorite, 
-        cartItem, 
+        addToStorage,
+        removeFromStorage,
+        cartItem,
         removeFromCart, 
         addToCart,
+        fevoriteID,
         windowSize
     } = useContext(Context)
 
@@ -22,10 +24,11 @@ export default function Image(props) {
     const heartCartColor = windowSize.innerWidth < 800 ? "gray": "white"
 
     function heart() {
-        if(props.liked_by_user) {
-            return <BsHeartFill size={32} style={{cursor: 'pointer'}} color="red" onClick={() => toggleFevorite(props.id) } />
+        const fevorited = fevoriteID.find(id => id === props.id)
+        if(fevorited) {
+            return <BsHeartFill size={32} style={{cursor: 'pointer'}} color="red" onClick={() => removeFromStorage(props.id) } />
         }else {
-            return <BsHeart size={32} style={{cursor: 'pointer'}} color={heartCartColor} onClick={() => toggleFevorite(props.id) } />
+            return <BsHeart size={32} style={{cursor: 'pointer'}} color={heartCartColor} onClick={() => addToStorage(props.id) } />
         }
     }
 
@@ -37,8 +40,6 @@ export default function Image(props) {
             return <MdBookmarkAdd size={32} style={{cursor: 'pointer'}} color={heartCartColor} onClick={() => addToCart(props)}/>
         }
     }
-
-
 
     function heartAndCart() {
 
@@ -81,7 +82,7 @@ export default function Image(props) {
     return(
         <div className="image-container" ref={ref}>
             {profile()}
-            <img className="image" src={props.urls.full} alt={props.alt_description} loading="lazy" />
+            <img className="image" src={props.urls.small} alt={props.alt_description} />
             {heartAndCart()}
         </div>
     )

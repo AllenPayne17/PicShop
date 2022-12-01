@@ -3,10 +3,12 @@ import "../App.css";
 import Header from '../components/Header';
 import Image from "../components/Image";
 import { Context } from "../Context";
+import Loader from "../components/Loader";
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 export default function Images() {
 
-    const {photos} = useContext(Context)
+    const {photos, fetchImages} = useContext(Context)
 
     const Images = photos.map((image) => (
         <Image key={image.id} {...image} />
@@ -15,9 +17,16 @@ export default function Images() {
     return (
         <>
             <Header />
-            <div className="container">
-                {Images}
-            </div>
+            <InfiniteScroll
+                dataLength={photos.length}
+                hasMore={true}
+                next={fetchImages}
+                loader={<Loader />}
+            >
+                <div className="container">
+                    {Images}
+                </div>
+            </InfiniteScroll>
         </>
     )
 }

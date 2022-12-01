@@ -15,7 +15,7 @@ export default function CartItem(props) {
     return(
         <>
         <div className="item-container">
-                <img src={props.urls.full} alt="" />
+                <img src={props.urls.small} alt="" />
             <div className="info">
                 <p>{props.alt_description}</p>
                 <p>by {props.user.name}</p> 
